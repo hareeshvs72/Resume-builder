@@ -18,7 +18,7 @@ function App() {
          <Routes>
             <Route path='/' element={<LandingPage/>} />
             <Route path='/History' element={<History/>} />
-            <Route path='/ResumeGenerator' element={<ResumeGenerator/>} />
+            <Route path='/Resume' element={<ResumeGenerator/>} />
             <Route path='/UserForm' element={<UserForm/>} />
             <Route path='/*' element={<PageNotFound/>} />
          </Routes>
