@@ -9,7 +9,11 @@ import TextField from '@mui/material/TextField';
 
 const steps = ['Basic Informations', 'Contact Details', 'Education Details', 'Work Experience', 'Skills & Certification','Review & Submit '];
 
+
+
 function Steps() {
+
+  const skillSugetionArray = ['HTML','CSS','Java Script','Bootstrap','Tailwind','React','Node JS','GIT']
 
    const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
@@ -66,8 +70,7 @@ function Steps() {
                <TextField id="standard-basic-name" label="Full Name" variant="standard" />
                 <TextField id="standard-basic-job" label="JOb Title" variant="standard" />
                  <TextField id="standard-basic-localation" label="Location" variant="standard" />
-                 <TextField id="standard-basic-email" label="Email" variant="standard" />
-                <TextField id="standard-basic-phone" label="PhoneNumber" variant="standard" />
+                
             </div>
           </div>
         )
@@ -75,7 +78,8 @@ function Steps() {
           <div>
             <h3>Personal Details</h3>
             <div className="row p-3 d-flex">
-               
+                  <TextField id="standard-basic-email" label="Email" variant="standard" />
+                <TextField id="standard-basic-phone" label="PhoneNumber" variant="standard" />
                  <TextField id="standard-basic-github" label="Github Link" variant="standard" />
                  <TextField id="standard-basic-linkedin" label="LinkedIn Link" variant="standard" />
                  <TextField id="standard-basic-portfolio" label="Portfolio Link" variant="standard" />
@@ -106,6 +110,29 @@ function Steps() {
             </div>
           </div>
         )
+        case 4 :
+          return(
+           <div>
+            <h3>Skills</h3>
+              <div className='d-flex align-items-center justify-content-between p-3'>
+                <TextField sx={{width:'400px'}} id="standard-basic-skill" label="Job or Internship" variant="standard" />
+                <Button variant="text">Add</Button>
+              </div>
+              <h5>Suggetions</h5>
+              <div className="d-felx flex-wrap justify-content-between my-3">
+                {
+                  skillSugetionArray.map(userSkill=>(
+                   
+                    <Button className='m-2' key={userSkill} variant="contained">{userSkill}</Button> 
+                  ))
+                }
+              </div>
+              <h5>Add Skills</h5>
+              <div className="d-felx flex-wrap justify-content-between my-3">
+                 <span className='btn btn-primary d-felx align-items-center justify-content-center '>React <button className='btn text-light'>X</button> </span>
+              </div>
+           </div>
+          )
          case 5 : return(
           <div>
             <h3>Professional Summary</h3>

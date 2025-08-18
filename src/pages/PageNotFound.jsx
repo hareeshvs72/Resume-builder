@@ -2,7 +2,10 @@ import React from 'react'
 
 function PageNotFound() {
   return (
-    <div>PageNotFound</div>
+    <div style={{height:'80vh'}} className='d-flex flex-column justify-content-center ' >
+      PageNotFound
+      
+      </div>
   )
 }
 

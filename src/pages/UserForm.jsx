@@ -1,7 +1,7 @@
 import React from 'react'
 import Steps from '../components/Steps'
 import Preview from '../components/Preview'
-
+import { FaEdit } from "react-icons/fa";
 
 function UserForm() {
   return (
