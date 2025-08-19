@@ -26,7 +26,7 @@ function Preview() {
                 
               {/* history */}
                <Link to={'/History'} className='btn fs-3 text-primary' ><FaHistory /></Link>
-                <Link to={'/resume'} className='btn  text-primary' >BACK</Link>
+                <div><Link to={'/resume'} className='btn  text-primary' >BACK</Link></div>
            </Stack>
                   
           </Stack>
