@@ -26,7 +26,9 @@ function Preview() {
                 
               {/* history */}
                <Link to={'/History'} className='btn fs-3 text-primary' ><FaHistory /></Link>
-                <div><Link to={'/resume'} className='btn  text-primary' >BACK</Link></div>
+                <div className='d-flex align-items-center  ' >
+                  <Link to={'/resume'} className='btn  text-primary fw-bold ' >BACK</Link>
+                  </div>
            </Stack>
                   
           </Stack>
