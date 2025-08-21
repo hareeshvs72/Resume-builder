@@ -11,7 +11,7 @@ const steps = ['Basic Informations', 'Contact Details', 'Education Details', 'Wo
 
 
 
-function Steps() {
+function Steps({userInput,setUserInput}) {
 
   const skillSugetionArray = ['HTML','CSS','Java Script','Bootstrap','Tailwind','React','Node JS','GIT']
    const [activeStep, setActiveStep] = React.useState(0);
@@ -19,40 +19,11 @@ function Steps() {
 
   // state for storing user input data
 
-  const [userInput , setUserInput] = React.useState({
-    personalDetails:{
-      name:'',
-      jobTitle:'',
-      location:'',
-      email:'',
-      phoneNumber:'',
-      githubLink:'',
-      linkedinLink:'',
-      portfolioLink:''
-    },
-    educationDetails:{
-      course:'',
-      college:'',
-      univercity:'',
-      year:''
-
-    },
-    experience:{
-      jobRole:'',
-      company:'',
-      jobLocation:'',
-      duration:'',
-
-    },
-    skill:[],
-    summary:''
-
-
-  })
+ 
 
   const userSkillRef = React.useRef()
 
-  console.log(userInput);
+  // console.log(userInput);
   
 
   const isStepOptional = (step) => {
@@ -232,7 +203,7 @@ function Steps() {
           <div>
             <h3>Professional Summary</h3>
             <div className="row p-3 d-flex">
-               <TextField id="standard-basic-role" label="Write a short summary" variant="standard" multiline rows={4} defaultValue={"Motivated and detail-oriented beginner in web development with foundational knowledge of HTML, CSS, and JavaScript. Eager to learn new technologies and build practical projects. Strong problem-solving skills and a commitment to continuous improvement."} onChange={e=>setUserInput({
+               <TextField id="standard-basic-role" label="Write a short summary" variant="standard" multiline rows={4}  defaultValue={"Motivated and detail-oriented beginner in web development with foundational knowledge of HTML, CSS, and JavaScript. Eager to learn new technologies and build practical projects. Strong problem-solving skills and a commitment to continuous improvement."} onChange={e=>setUserInput({
                ...userInput,summary:e.target.value
                })}  value={userInput.summary}  />
                 

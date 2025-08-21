@@ -6,10 +6,10 @@ import { Link } from 'react-router-dom'
 function LandingPage() {
   return (
     <>
-    <section id='part1' style={{width:'100%',overflowX:'hidden',height:'450px',backgroundImage:"url('https://img.pikbest.com/origin/10/49/76/89xpIkbEsTfDm.jpg!w700wp')",backgroundRepeat:'no-repeat',backgroundSize:'cover',backgroundAttachment:'fixed'}} >
-      <div className="row pt-5">
+    <section id='part1' style={{width:'100%',overflowX:'hidden',height:'100vh',backgroundImage:"url('https://img.pikbest.com/origin/10/49/76/89xpIkbEsTfDm.jpg!w700wp')",backgroundRepeat:'no-repeat',backgroundSize:'cover',backgroundAttachment:'fixed'}} >
+      <div className="row pt-5 ">
         <div className="col-12 col-md-4"></div>
-        <div className="col-12 col-md-4 text-center py-5 my-5  border border-dark rounded" style={{backgroundColor:"rgb(255,255,255,.5)"}}>
+        <div className="   col-12 col-md-4 text-center py-5 my-5  border border-dark rounded" style={{backgroundColor:"rgb(255,255,255,.5)"}}>
           <h3>Desiged to get Hierd</h3>
           <h4>Your Skills,Your Story , Your Next Job - all in come</h4>
           <Link to={'/resume'}>
@@ -46,7 +46,7 @@ function LandingPage() {
        </div>
     </section>
      
-    <section id='part3' style={{width:'100%',overflowX:'hidden',height:'450px',backgroundImage:"url('https://img.pikbest.com/origin/10/49/76/89xpIkbEsTfDm.jpg!w700wp')",backgroundRepeat:'no-repeat',backgroundSize:'cover',backgroundAttachment:'fixed'}} >
+    <section id='part3' style={{width:'100%',overflowX:'hidden',height:'100vh',backgroundImage:"url('https://img.pikbest.com/origin/10/49/76/89xpIkbEsTfDm.jpg!w700wp')",backgroundRepeat:'no-repeat',backgroundSize:'cover',backgroundAttachment:'fixed'}} >
     </section>
 
     <section   id='part4' className='tesimonial container-fluid p-5'>
