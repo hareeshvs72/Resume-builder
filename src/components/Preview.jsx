@@ -10,7 +10,7 @@ import { FaEdit } from "react-icons/fa";
 import { FaHistory } from "react-icons/fa";
 import Edit from './Edit';
 
-function Preview({ userInput }) {
+function Preview({ userInput,finish}) {
   // console.log(userInput);
 
   return (
@@ -21,7 +21,7 @@ function Preview({ userInput }) {
 
       <Stack direction={'row'} sx={{ margin: '20px', justifyContent: 'flex-end' }}>
 
-        <Stack direction={'row'} >
+        <Stack direction={'row'} className='d-flex align-items-center ' >
           {/* download */}
           <button className='btn fs-3 text-primary' ><FaFileDownload /></button>
 
