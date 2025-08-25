@@ -6,3 +6,9 @@ import commonAPI from "./commonAPI"
 export const addResumeApi = (resume)=>{
     return commonAPI("POST",`${BASEURL}/all-resume`,resume)
 }
+
+// add resume to history 
+
+export const addResumeDownloadAPI = (resume)=>{
+    return commonAPI("POST",`${BASEURL}/history`,resume)
+}
