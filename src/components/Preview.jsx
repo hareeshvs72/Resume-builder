@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import { Link } from 'react-router-dom';
@@ -11,9 +11,12 @@ import { FaHistory } from "react-icons/fa";
 import Edit from './Edit';
 import { jsPDF } from "jspdf";
 import html2canvas from 'html2canvas';
+import { addResumeDownloadAPI } from '../services/allAPI';
 
 function Preview({ userInput,finish}) {
   // console.log(userInput);
+  
+  const [downloadStatus , setDownloadStatus] = useState(false)
 
   const downloadCV = async ()=>{
        const input = document.getElementById('previewResult')
@@ -31,6 +34,17 @@ function Preview({ userInput,finish}) {
 
       const localTimeDAte = new Date()
       const timeStamp = `${localTimeDAte.toLocaleDateString()}, ${localTimeDAte.toLocaleTimeString()}`
+//  add data to api
+      try {
+        const result = await addResumeDownloadAPI({...userInput,imgURL,timeStamp})
+        console.log(result);
+        setDownloadStatus(true)
+        
+        
+      } catch (error) {
+        console.log(error);
+        
+      }
       
   }
 
@@ -43,20 +57,25 @@ function Preview({ userInput,finish}) {
      <div>
          <Stack direction={'row'} sx={{ margin: '40px', justifyContent: 'flex-end' }}>
   
-         {finish && <Stack direction={'row'} className='d-flex align-items-center ' >
+        {finish &&  <Stack direction={'row'} className='d-flex align-items-center ' >
             {/* download */}
             <button className='btn fs-3 text-primary' onClick={downloadCV} ><FaFileDownload /></button>
   
-            {/* edit */}
-  
-            <div><Edit /></div>
-  
-            {/* history */}
-            <Link to={'/History'} className='btn fs-3 text-primary' ><FaHistory /></Link>
+       { downloadStatus &&
+           <>
+              {/* edit */}
+    
+              <div><Edit /></div>
+    
+              {/* history */}
+              <Link to={'/History'} className='btn fs-3 text-primary' ><FaHistory /></Link>
+          </>}
+            
+            {/* back */}
             <div className='d-flex align-items-center  ' >
               <Link to={'/resume'} className='btn  text-primary fw-bold ' >BACK</Link>
             </div>
-          </Stack>}
+          </Stack> }
   
         </Stack>
   

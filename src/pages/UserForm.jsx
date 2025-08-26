@@ -40,7 +40,7 @@ function UserForm() {
     <>
       {
         finish ?  <div className='d-flex justify-content-center vh-100'> 
-        <Preview userInput={userInput} />
+        <Preview userInput={userInput} finish={finish} />
         </div>  :
 
           <div className="container">
@@ -51,7 +51,7 @@ function UserForm() {
 
               </div>
               <div className="col-lg-6 ">
-                <Preview userInput={userInput} finish={finish} />
+                <Preview userInput={userInput}  />
               </div>
             </div>
           </div>
