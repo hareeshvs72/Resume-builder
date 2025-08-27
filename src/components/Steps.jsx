@@ -122,7 +122,7 @@ function Steps({userInput,setUserInput,setFinish,setResumeId}) {
                })} value={userInput.personalDetails.githubLink}  />
                  <TextField id="standard-basic-linkedin" label="LinkedIn Link" variant="standard" onChange={e=>setUserInput({
                 ...userInput,personalDetails:{...userInput.personalDetails,linkedinLink:e.target.value}
-               })}  />
+               })} value={userInput.personalDetails.linkedinLink} />
                  <TextField id="standard-basic-portfolio" label="Portfolio Link" variant="standard" onChange={e=>setUserInput({
                 ...userInput,personalDetails:{...userInput.personalDetails,portfolioLink:e.target.value}
                })}  value={userInput.personalDetails.portfolioLink}  />
@@ -160,7 +160,7 @@ function Steps({userInput,setUserInput,setFinish,setResumeId}) {
                 ...userInput,experience:{...userInput.experience,company:e.target.value}
                })}  value={userInput.experience.company}   />
                  <TextField id="standard-basic-comploc" label="Company Location " variant="standard" onChange={e=>setUserInput({
-                ...userInput,experience:{...userInput.personalDetails,jobLocation:e.target.value}
+                ...userInput,experience:{...userInput.experience,jobLocation:e.target.value}
                })}  value={userInput.experience.jobLocation}  />
                  <TextField id="standard-basic-Duration" label="Duration" variant="standard" onChange={e=>setUserInput({
                 ...userInput,experience:{...userInput.experience,duration:e.target.value}

@@ -92,7 +92,7 @@ function Edit({ resumeid }) {
                             })} value={userInput?.personalDetails?.githubLink} />
                             <TextField id="standard-basic-linkedin" label="LinkedIn Link" variant="standard" onChange={e => setUserInput({
                                 ...userInput, personalDetails: { ...userInput.personalDetails, linkedinLink: e.target.value }
-                            })}  />
+                            })} value={userInput?.personalDetails?.linkedinLink} />
                             <TextField id="standard-basic-portfolio" label="Portfolio Link" variant="standard" onChange={e => setUserInput({
                                 ...userInput, personalDetails: { ...userInput.personalDetails, portfolioLink: e.target.value }
                             })} value={userInput?.personalDetails?.portfolioLink} />
@@ -121,10 +121,18 @@ function Edit({ resumeid }) {
 
                         <h3>Professional Details</h3>
                         <div className="row p-3 d-flex">
-                            <TextField id="standard-basic-role" label="Job or Internship" variant="standard" />
-                            <TextField id="standard-basic-Company" label="Company Name" variant="standard" />
-                            <TextField id="standard-basic-comploc" label="Company Location " variant="standard" />
-                            <TextField id="standard-basic-Duration" label="Duration" variant="standard" />
+                            <TextField id="standard-basic-role" label="Job or Internship" variant="standard" onChange={e => setUserInput({
+                                ...userInput, experience: { ...userInput.experience, jobRole: e.target.value }
+                            })} value={userInput?.experience?.jobRole} />
+                            <TextField id="standard-basic-Company" label="Company Name" variant="standard" onChange={e => setUserInput({
+                                ...userInput, experience: { ...userInput.experience, company: e.target.value }
+                            })} value={userInput?.experience?.company} />
+                            <TextField id="standard-basic-comploc" label="Company Location " variant="standard" onChange={e => setUserInput({
+                                ...userInput, experience: { ...userInput.experience, jobLocation: e.target.value }
+                            })} value={userInput?.experience?.jobLocation} />
+                            <TextField id="standard-basic-Duration" label="Duration" variant="standard" onChange={e => setUserInput({
+                                ...userInput, experience: { ...userInput.experience, duration: e.target.value }
+                            })} value={userInput?.experience?.duration} />
 
                         </div>
                         {/* skills */}
