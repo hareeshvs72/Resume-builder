@@ -36,18 +36,23 @@ function UserForm() {
   })
   // state for finish
   const [finish, setFinish] = useState(false)
+
+//  state for storing id of created resume
+
+const [resumeid , setResumeId] = useState("")
+
   return (
     <>
       {
         finish ?  <div className='d-flex justify-content-center vh-100'> 
-        <Preview userInput={userInput} finish={finish} />
+        <Preview resumeid={resumeid} userInput={userInput} finish={finish} />
         </div>  :
 
           <div className="container">
             <div className="row p-5">
               <div className="col-lg-6">
 
-                <Steps userInput={userInput} setUserInput={setUserInput} setFinish={setFinish}  />
+                <Steps setResumeId={setResumeId} userInput={userInput} setUserInput={setUserInput} setFinish={setFinish}  />
 
               </div>
               <div className="col-lg-6 ">

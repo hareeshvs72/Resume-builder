@@ -6,8 +6,7 @@ import Divider from '@mui/material/Divider';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import { FaTrash } from "react-icons/fa";
-import { getHistoryApi } from '../services/allAPI';
-getHistoryApi
+import { getHistoryApi , deleteHistory } from '../services/allAPI';
 
 function History() {
 
@@ -15,7 +14,7 @@ function History() {
 
   useEffect(() => {
     getHistory()
-  }, [])
+  }, [resume])
 
   const getHistory = async () => {
     try {
@@ -28,7 +27,17 @@ function History() {
 
     }
   }
-  console.log(resume);
+  // console.log(resume);
+  const handileHistoryDelete = async (id)=>{
+   try {
+      await deleteHistory(id)
+    getHistory()
+   } catch (error) {
+     console.log(error);
+     
+   }
+
+  }
 
 
   return (
@@ -47,7 +56,7 @@ function History() {
                   <Paper elevation={3} sx={{ my: 5, p: 5, textAlign: "center" }} >
                     <div className='d-flex align-items-center justify-content-evenly '>
                       <h6 className=''>Review At :<br /> {item?.timeStamp}</h6>
-                      <button className='btn text-danger  ms-5' style={{ fontSize: '20px' }}><FaTrash /></button>
+                      <button onClick={()=>handileHistoryDelete(item?.id)} className='btn text-danger  ms-5' style={{ fontSize: '20px' }}><FaTrash /></button>
                     </div>
 
                     <div className='border rounded p-3 '>

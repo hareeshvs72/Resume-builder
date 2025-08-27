@@ -13,7 +13,7 @@ const steps = ['Basic Informations', 'Contact Details', 'Education Details', 'Wo
 
 
 
-function Steps({userInput,setUserInput,setFinish}) {
+function Steps({userInput,setUserInput,setFinish,setResumeId}) {
 
   const skillSugetionArray = ['HTML','CSS','Java Script','Bootstrap','Tailwind','React','Node JS','GIT']
    const [activeStep, setActiveStep] = React.useState(0);
@@ -109,7 +109,7 @@ function Steps({userInput,setUserInput,setFinish}) {
         )
          case 1 : return(
           <div>
-            <h3>Personal Details</h3>
+            <h3>Contact Details</h3>
             <div className="row p-3 d-flex">
                   <TextField id="standard-basic-email" label="Email" variant="standard" onChange={e=>setUserInput({
                 ...userInput,personalDetails:{...userInput.personalDetails,email:e.target.value}
@@ -207,7 +207,7 @@ function Steps({userInput,setUserInput,setFinish}) {
             <div className="row p-3 d-flex">
                <TextField id="standard-basic-role" label="Write a short summary" variant="standard" multiline rows={4}  defaultValue={"Motivated and detail-oriented beginner in web development with foundational knowledge of HTML, CSS, and JavaScript. Eager to learn new technologies and build practical projects. Strong problem-solving skills and a commitment to continuous improvement."} onChange={e=>setUserInput({
                ...userInput,summary:e.target.value
-               })}  value={userInput.summary}  />
+               })}   />
                 
             </div>
           </div>
@@ -225,6 +225,9 @@ function Steps({userInput,setUserInput,setFinish}) {
           if(name && jobTitle && location){
             try {
               const result = await addResumeApi(userInput)
+              setResumeId(result?.data?.id)
+              // console.log(result.data.id);
+              
                swal("Success!", "Resume Addes SuccessFully", "success");  
                setFinish(true)
               

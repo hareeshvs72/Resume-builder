@@ -27,3 +27,9 @@ export const deleteHistory = async (id)=>{
 
 }
  
+// get resume api "get" - get called by edit component when its open in browser (use effect)
+
+export const getResumeApiEdit = async (id)=>{
+    return await commonAPI("GET",`${BASEURL}/all-resume/${id}`,{})
+
+}

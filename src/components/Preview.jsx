@@ -13,72 +13,73 @@ import { jsPDF } from "jspdf";
 import html2canvas from 'html2canvas';
 import { addResumeDownloadAPI } from '../services/allAPI';
 
-function Preview({ userInput,finish}) {
+function Preview({ userInput, finish, resumeid }) {
   // console.log(userInput);
-  
-  const [downloadStatus , setDownloadStatus] = useState(false)
 
-  const downloadCV = async ()=>{
-       const input = document.getElementById('previewResult')
-       const canva = await html2canvas(input,{scale:2})
-       const imgURL = canva.toDataURL('image/png')
-      // console.log(imgURL);
-      const pdf = new jsPDF(imgURL)
-      const pdfWidth = pdf.internal.pageSize.getWidth()
-      const pdfHeight = pdf.internal.pageSize.getHeight()
+  const [downloadStatus, setDownloadStatus] = useState(false)
 
-      pdf.addImage(imgURL,'PNG',0,0,pdfWidth,pdfHeight)
-      pdf.save('resume.pdf')
+  const downloadCV = async () => {
+    const input = document.getElementById('previewResult')
+    const canva = await html2canvas(input, { scale: 2 })
+    const imgURL = canva.toDataURL('image/png')
+    // console.log(imgURL);
+    const pdf = new jsPDF(imgURL)
+    const pdfWidth = pdf.internal.pageSize.getWidth()
+    const pdfHeight = pdf.internal.pageSize.getHeight()
 
-      // get date 
+    pdf.addImage(imgURL, 'PNG', 0, 0, pdfWidth, pdfHeight)
+    pdf.save('resume.pdf')
 
-      const localTimeDAte = new Date()
-      const timeStamp = `${localTimeDAte.toLocaleDateString()}, ${localTimeDAte.toLocaleTimeString()}`
-//  add data to api
-      try {
-        const result = await addResumeDownloadAPI({...userInput,imgURL,timeStamp})
-        console.log(result);
-        setDownloadStatus(true)
-        
-        
-      } catch (error) {
-        console.log(error);
-        
-      }
-      
+    // get date 
+
+    const localTimeDAte = new Date()
+    const timeStamp = `${localTimeDAte.toLocaleDateString()}, ${localTimeDAte.toLocaleTimeString()}`
+    //  add data to api
+    try {
+      const result = await addResumeDownloadAPI({ ...userInput, imgURL, timeStamp })
+      console.log(result);
+      setDownloadStatus(true)
+
+
+    } catch (error) {
+      console.log(error);
+
+    }
+
   }
 
   return (
-     
-   
+
+
 
     < >
 
-     <div>
-         <Stack direction={'row'} sx={{ margin: '40px', justifyContent: 'flex-end' }}>
-  
-        {finish &&  <Stack direction={'row'} className='d-flex align-items-center ' >
+      <div>
+        <Stack direction={'row'} sx={{ margin: '40px', justifyContent: 'flex-end' }}>
+
+          {finish && <Stack direction={'row'} className='d-flex align-items-center ' >
             {/* download */}
             <button className='btn fs-3 text-primary' onClick={downloadCV} ><FaFileDownload /></button>
-  
-       { downloadStatus &&
-           <>
-              {/* edit */}
-    
-              <div><Edit /></div>
-    
-              {/* history */}
-              <Link to={'/History'} className='btn fs-3 text-primary' ><FaHistory /></Link>
-          </>}
-            
+
+
+            {/* edit */}
+
+            <div><Edit resumeid={resumeid} /></div>
+
+            {downloadStatus &&
+              <>
+                {/* history */}
+                <Link to={'/History'} className='btn fs-3 text-primary' ><FaHistory /></Link>
+              </>}
+
             {/* back */}
             <div className='d-flex align-items-center  ' >
               <Link to={'/resume'} className='btn  text-primary fw-bold ' >BACK</Link>
             </div>
-          </Stack> }
-  
+          </Stack>}
+
         </Stack>
-  
+
         <Box component="section" >
           <Paper id='previewResult' elevation={3} sx={{ p: 2, textAlign: "center" }} >
             <h2>  {userInput.personalDetails.name}</h2>
@@ -91,32 +92,32 @@ function Preview({ userInput,finish}) {
             </p>
             <Divider sx={{ fontSize: "25px" }}>SUMMARY</Divider>
             <p className='fs-5 text-start'>{userInput.summary}</p>
-  
+
             <Divider sx={{ fontSize: "25px", marginBottom: "10px" }}>EDUCATION</Divider>
             <h6>{userInput.educationDetails.course}</h6>
             <p> <span>{userInput.educationDetails.college} </span> | <span>{userInput.educationDetails.univercity}</span> | <span> {userInput.educationDetails.year}</span> </p>
-  
+
             <Divider sx={{ fontSize: "25px", marginBottom: "10px" }}>PROFESSIONAL EXPERIENCE</Divider>
             <h6>{userInput.experience.jobRole}</h6>
             <p> <span>{userInput.experience.company} </span> | <span>{userInput.experience.jobLocation}</span> | <span> {userInput.experience.duration}</span> </p>
-  
+
             <Divider sx={{ fontSize: "25px", marginBottom: "10px" }}>Skills</Divider>
-  
+
             <Stack justifyContent={'space-evenly'} spacing={2} direction="row" sx={{ flexWrap: "wrap", gap: "10px" }}>
-  
+
               {userInput.skill?.map((skill) => (
                 <Button key={skill} variant="contained">{skill}</Button>
               ))}
-  
-  
-  
-  
+
+
+
+
             </Stack>
-  
+
           </Paper>
         </Box>
-     </div>
-      
+      </div>
+
     </>
 
   )

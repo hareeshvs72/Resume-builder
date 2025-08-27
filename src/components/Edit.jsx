@@ -6,6 +6,8 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import TextField from '@mui/material/TextField';
+import { getResumeApiEdit } from '../services/allAPI';
+
 
 const style = {
     position: 'absolute',
@@ -21,8 +23,26 @@ const style = {
     p: 4,
 };
 
-function Edit() {
+function Edit({ resumeid }) {
     const [open, setOpen] = React.useState(false);
+    const [userInput, setUserInput] = React.useState({});
+    console.log(userInput)
+
+    React.useEffect(() => {
+        resumeid && getEditResumeDetails()
+    }, [resumeid])
+
+    const getEditResumeDetails = async () => {
+        try {
+            const result = await getResumeApiEdit(resumeid)
+            setUserInput(result?.data)
+        } catch (err) {
+            console.log(err);
+
+        }
+
+    }
+
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
@@ -45,31 +65,55 @@ function Edit() {
 
                         <h3>Personal Details</h3>
                         <div className="row p-3 d-flex">
-                            <TextField id="standard-basic-name" label="Full Name" variant="standard" />
-                            <TextField id="standard-basic-job" label="JOb Title" variant="standard" />
-                            <TextField id="standard-basic-localation" label="Location" variant="standard" />
+                            <TextField id="standard-basic-name" label="Full Name" variant="standard" onChange={e => setUserInput({
+                                ...userInput, personalDetails: { ...userInput.personalDetails, name: e.target.value }
+                            })} value={userInput?.personalDetails?.name} />
+                            <TextField id="standard-basic-job" label="JOb Title" variant="standard" onChange={e => setUserInput({
+                                ...userInput, personalDetails: { ...userInput.personalDetails, jobTitle: e.target.value }
+                            })} value={userInput?.personalDetails?.jobTitle} />
+                            <TextField id="standard-basic-localation" label="Location" variant="standard" onChange={e => setUserInput({
+                                ...userInput, personalDetails: { ...userInput.personalDetails, location: e.target.value }
+                            })} value={userInput?.personalDetails?.location} />
 
                         </div>
 
                         {/* contact details */}
 
-                        <h3>Personal Details</h3>
+                        <h3>Contact Details</h3>
                         <div className="row p-3 d-flex">
-                            <TextField id="standard-basic-email" label="Email" variant="standard" />
-                            <TextField id="standard-basic-phone" label="PhoneNumber" variant="standard" />
-                            <TextField id="standard-basic-github" label="Github Link" variant="standard" />
-                            <TextField id="standard-basic-linkedin" label="LinkedIn Link" variant="standard" />
-                            <TextField id="standard-basic-portfolio" label="Portfolio Link" variant="standard" />
+                            <TextField id="standard-basic-email" label="Email" variant="standard" onChange={e => setUserInput({
+                                ...userInput, personalDetails: { ...userInput.personalDetails, email: e.target.value }
+                            })} value={userInput?.personalDetails?.email} />
+                            <TextField id="standard-basic-phone" label="PhoneNumber" variant="standard" onChange={e => setUserInput({
+                                ...userInput, personalDetails: { ...userInput.personalDetails, phoneNumber: e.target.value }
+                            })} value={userInput?.personalDetails?.phoneNumber} />
+                            <TextField id="standard-basic-github" label="Github Link" variant="standard" onChange={e => setUserInput({
+                                ...userInput, personalDetails: { ...userInput.personalDetails, githubLink: e.target.value }
+                            })} value={userInput?.personalDetails?.githubLink} />
+                            <TextField id="standard-basic-linkedin" label="LinkedIn Link" variant="standard" onChange={e => setUserInput({
+                                ...userInput, personalDetails: { ...userInput.personalDetails, linkedinLink: e.target.value }
+                            })}  />
+                            <TextField id="standard-basic-portfolio" label="Portfolio Link" variant="standard" onChange={e => setUserInput({
+                                ...userInput, personalDetails: { ...userInput.personalDetails, portfolioLink: e.target.value }
+                            })} value={userInput?.personalDetails?.portfolioLink} />
                         </div>
 
                         {/* Education details */}
 
                         <h3>Education Details</h3>
                         <div className="row p-3 d-flex">
-                            <TextField id="standard-basic-Course" label="Course Name" variant="standard" />
-                            <TextField id="standard-basic-College" label="College Name" variant="standard" />
-                            <TextField id="standard-basic-Univercity" label="Univercity" variant="standard" />
-                            <TextField id="standard-basic-Year" label="Year Of Passout" variant="standard" />
+                            <TextField id="standard-basic-Course" label="Course Name" variant="standard" onChange={e => setUserInput({
+                                ...userInput, educationDetails: { ...userInput.educationDetails, course: e.target.value }
+                            })} value={userInput?.educationDetails?.course} />
+                            <TextField id="standard-basic-College" label="College Name" variant="standard" onChange={e => setUserInput({
+                                ...userInput, educationDetails: { ...userInput.educationDetails, college: e.target.value }
+                            })} value={userInput?.educationDetails?.college} />
+                            <TextField id="standard-basic-Univercity" label="Univercity" variant="standard" onChange={e => setUserInput({
+                                ...userInput, educationDetails: { ...userInput.educationDetails, univercity: e.target.value }
+                            })} value={userInput?.educationDetails?.univercity} />
+                            <TextField id="standard-basic-Year" label="Year Of Passout" variant="standard" onChange={e => setUserInput({
+                                ...userInput, educationDetails: { ...userInput.educationDetails, year: e.target.value }
+                            })} value={userInput?.educationDetails?.year} />
 
                         </div>
 
@@ -86,23 +130,23 @@ function Edit() {
                         {/* skills */}
                         <h3>Skills</h3>
                         <div className='d-flex align-items-center justify-content-between p-3'>
-                <TextField sx={{width:'400px'}} id="standard-basic-skill" label="Job or Internship" variant="standard" />
-                <Button variant="text">Add</Button>
-              </div>
+                            <TextField sx={{ width: '400px' }} id="standard-basic-skill" label="Job or Internship" variant="standard" />
+                            <Button variant="text">Add</Button>
+                        </div>
 
-              <h5>Add Skills</h5>
-              <div className="d-felx flex-wrap justify-content-between my-3">
-                 <span className='btn btn-outline-primary d-felx align-items-center justify-content-center '>React <button className='btn text-light'>X</button> </span>
-              </div>
+                        <h5>Add Skills</h5>
+                        <div className="d-felx flex-wrap justify-content-between my-3">
+                            <span className='btn btn-outline-primary d-felx align-items-center justify-content-center '>React <button className='btn text-light'>X</button> </span>
+                        </div>
 
                         {/*  Summary*/}
 
 
                         <h3>Professional Summary</h3>
-                                    <div className="row p-3 d-flex">
-                                       <TextField id="standard-basic-role" label="Write a short summary" variant="standard" multiline rows={4}  />
-                                        
-                                    </div>
+                        <div className="row p-3 d-flex">
+                            <TextField id="standard-basic-role" label="Write a short summary" variant="standard" multiline rows={4} />
+
+                        </div>
 
 
                     </Typography>
