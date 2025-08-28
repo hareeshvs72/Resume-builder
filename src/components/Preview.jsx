@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import { Link } from 'react-router-dom';
@@ -13,10 +13,16 @@ import { jsPDF } from "jspdf";
 import html2canvas from 'html2canvas';
 import { addResumeDownloadAPI } from '../services/allAPI';
 
-function Preview({ userInput, finish, resumeid }) {
+function Preview({ userInput,setUserInput, finish, resumeid }) {
   // console.log(userInput);
-
+  const [updateResume , setUpdateResume] = useState({})
   const [downloadStatus, setDownloadStatus] = useState(false)
+ 
+
+  //  useEffect(()=>{
+  //   updateResume !={} &&
+  //       setUserInput(updateResume)
+  //  },[updateResume])
 
   const downloadCV = async () => {
     const input = document.getElementById('previewResult')
@@ -47,7 +53,7 @@ function Preview({ userInput, finish, resumeid }) {
     }
 
   }
-
+ 
   return (
 
 
@@ -64,7 +70,7 @@ function Preview({ userInput, finish, resumeid }) {
 
             {/* edit */}
 
-            <div><Edit resumeid={resumeid} /></div>
+            <div><Edit resumeid={resumeid} setUpdateResume={setUpdateResume} /></div>
 
             {downloadStatus &&
               <>

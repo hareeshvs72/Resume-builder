@@ -6,7 +6,8 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import TextField from '@mui/material/TextField';
-import { getResumeApiEdit } from '../services/allAPI';
+import { getResumeApiEdit ,editResumeApi } from '../services/allAPI';
+import swal from 'sweetalert';
 
 
 const style = {
@@ -23,9 +24,10 @@ const style = {
     p: 4,
 };
 
-function Edit({ resumeid }) {
+function Edit({ resumeid ,setUpdateResume }) {
     const [open, setOpen] = React.useState(false);
     const [userInput, setUserInput] = React.useState({});
+    const [userSkill , setUserSkill] = React.useState("")
     console.log(userInput)
 
     React.useEffect(() => {
@@ -45,6 +47,39 @@ function Edit({ resumeid }) {
 
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+
+    const addSkill = ()=>{
+        if(userSkill){
+            if(userInput.skill.includes(userSkill) ){
+                alert("skill Already Existing !!! Add Another")
+           }
+           else{
+              //  userInput.skill.push(inputSkill)
+              setUserInput({...userInput,skill:[...userInput.skill,userSkill]})
+              
+           }
+            setUserSkill("")
+        }
+       
+    }
+    
+
+      const removeSkill = (skillss)=>{
+     setUserInput({...userInput,skill:userInput.skill.filter((item )=>item!=skillss)})
+     
+  }
+    
+   const handileUpdateEdit = async ()=>{
+    try {
+        const result = await editResumeApi(userInput?.id,userInput)
+        setUpdateResume(result?.data)
+        swal("success !", "Resume Update Successfully", "success")
+        handleClose()
+    } catch (error) {
+        console.log(error);
+        
+    }
+   }
 
     return (
         <>
@@ -138,13 +173,19 @@ function Edit({ resumeid }) {
                         {/* skills */}
                         <h3>Skills</h3>
                         <div className='d-flex align-items-center justify-content-between p-3'>
-                            <TextField sx={{ width: '400px' }} id="standard-basic-skill" label="Job or Internship" variant="standard" />
-                            <Button variant="text">Add</Button>
+                            <TextField onChange={(e)=>setUserSkill(e.target.value)} sx={{ width: '400px' }} id="standard-basic-skill" label="Add skill" variant="standard" value={userSkill} />
+                            <Button onClick={addSkill} variant="text">Add</Button>
                         </div>
 
-                        <h5>Add Skills</h5>
-                        <div className="d-felx flex-wrap justify-content-between my-3">
-                            <span className='btn btn-outline-primary d-felx align-items-center justify-content-center '>React <button className='btn text-light'>X</button> </span>
+                        <h5>Selected Skill</h5>
+                        <div className="d-flex flex-wrap justify-content-between my-3">
+                            {
+                             userInput?.skill?.length>0 &&
+                              userInput?.skill?.map((item)=>(
+                                <span key={item} className='btn my-2 btn-outline-primary d-flex align-items-center justify-content-center '>{item} <button className='btn text-light' onClick={()=>removeSkill(item)} >X</button></span>
+
+                              ))
+                             }
                         </div>
 
                         {/*  Summary*/}
@@ -152,13 +193,13 @@ function Edit({ resumeid }) {
 
                         <h3>Professional Summary</h3>
                         <div className="row p-3 d-flex">
-                            <TextField id="standard-basic-role" label="Write a short summary" variant="standard" multiline rows={4} />
+                            <TextField id="standard-basic-role" label="Write a short summary" variant="standard" multiline rows={4} value={userInput?.summary} onChange={(e)=>setUserInput({...userInput,summary:e.target.value})} />
 
                         </div>
 
 
                     </Typography>
-                    <Button variant="contained">Update</Button>
+                    <Button variant="contained" onClick={handileUpdateEdit} >Update</Button>
                 </Box>
             </Modal>
         </>

@@ -33,3 +33,11 @@ export const getResumeApiEdit = async (id)=>{
     return await commonAPI("GET",`${BASEURL}/all-resume/${id}`,{})
 
 }
+
+// edit resume api - put - called by edit component when update btn clicked
+
+export const editResumeApi  = async (id,resume)=>{
+    return await commonAPI("PUT",`${BASEURL}/all-resume/${id}`,resume)
+
+}
+

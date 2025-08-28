@@ -45,7 +45,7 @@ const [resumeid , setResumeId] = useState("")
     <>
       {
         finish ?  <div className='d-flex justify-content-center vh-100'> 
-        <Preview resumeid={resumeid} userInput={userInput} finish={finish} />
+        <Preview setUserInput={setUserInput}  resumeid={resumeid} userInput={userInput} finish={finish} />
         </div>  :
 
           <div className="container">
