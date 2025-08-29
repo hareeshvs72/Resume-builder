@@ -24,11 +24,11 @@ const style = {
     p: 4,
 };
 
-function Edit({ resumeid ,setUpdateResume }) {
+function Edit({ resumeid ,setUserInputUpdate }) {
     const [open, setOpen] = React.useState(false);
     const [userInput, setUserInput] = React.useState({});
     const [userSkill , setUserSkill] = React.useState("")
-    console.log(userInput)
+    // console.log(userInput)
 
     React.useEffect(() => {
         resumeid && getEditResumeDetails()
@@ -72,7 +72,7 @@ function Edit({ resumeid ,setUpdateResume }) {
    const handileUpdateEdit = async ()=>{
     try {
         const result = await editResumeApi(userInput?.id,userInput)
-        setUpdateResume(result?.data)
+        setUserInputUpdate(result?.data)
         swal("success !", "Resume Update Successfully", "success")
         handleClose()
     } catch (error) {

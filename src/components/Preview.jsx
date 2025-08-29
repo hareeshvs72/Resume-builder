@@ -15,14 +15,11 @@ import { addResumeDownloadAPI } from '../services/allAPI';
 
 function Preview({ userInput,setUserInput, finish, resumeid }) {
   // console.log(userInput);
-  const [updateResume , setUpdateResume] = useState({})
+ 
   const [downloadStatus, setDownloadStatus] = useState(false)
  
 
-  //  useEffect(()=>{
-  //   updateResume !={} &&
-  //       setUserInput(updateResume)
-  //  },[updateResume])
+  
 
   const downloadCV = async () => {
     const input = document.getElementById('previewResult')
@@ -70,7 +67,7 @@ function Preview({ userInput,setUserInput, finish, resumeid }) {
 
             {/* edit */}
 
-            <div><Edit resumeid={resumeid} setUpdateResume={setUpdateResume} /></div>
+            <div><Edit resumeid={resumeid} setUserInputUpdate={setUserInput} /></div>
 
             {downloadStatus &&
               <>
